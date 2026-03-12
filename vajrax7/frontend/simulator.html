@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAJRA AI | Supply Chain Intelligence</title>
+
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body class="dark-theme">
+    <nav class="navbar">
+        <div class="logo" style="gap: 1rem;">
+            <img src="logo.png" alt="VAJRA AI Logo" style="height: 46px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(14, 165, 233, 0.3));">
+            <span style="font-size: 1.8rem; letter-spacing: -0.5px; font-weight: 400;">VAJRA <strong style="color: var(--accent-color); font-weight: 700;">AI</strong></span>
+        </div>
+        <div class="nav-links">
+            <a href="simulator.html" class="active">Simulator</a>
+            <a href="suppliers.html">Suppliers</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="index.html" style="color: var(--status-critical); margin-left: 1rem;" title="Logout"><i class="fa-solid fa-power-off"></i></a>
+        </div>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin">
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div>
+                <h1>Supply Chain <span>Risk Intelligence</span></h1>
+                <p>Analyze operational exposure and external risk factors in real-time.</p>
+            </div>
+        </header>
+
+        <!-- Input Section -->
+        <section class="simulator-section glass-panel">
+            <h2><i class="fa-solid fa-sliders"></i> Scenario Simulator</h2>
+            <form id="simulation-form">
+                <div class="form-grid">
+                    <!-- Operational Inputs -->
+                    <div class="input-group">
+                        <h3>Operational Inputs</h3>
+                        <label>Supplier ID</label>
+                        <input type="text" id="supplier_id" value="SUP-001" required>
+
+                        <label>Supplier Location</label>
+                        <input type="text" id="supplier_location" value="Taiwan" required>
+
+                        <label>Daily Demand (D)</label>
+                        <input type="number" id="daily_demand" value="100" required>
+
+                        <label>Current Inventory (I)</label>
+                        <input type="number" id="current_inventory" value="1500" required>
+
+                        <label>Safety Stock (SS)</label>
+                        <input type="number" id="safety_stock" value="200" required>
+
+                        <label>Lead Time (L) in days</label>
+                        <input type="number" id="supplier_lead_time" value="14" required>
+
+                        <label>Days of Delay (Del)</label>
+                        <input type="number" id="days_of_delay" value="0.0" step="0.5" required>
+                    </div>
+
+                    <!-- Risk Feature Inputs -->
+                    <div class="input-group">
+                        <h3>Risk Feature Inputs (0 to 1)</h3>
+                        <label>Flood Severity (F)</label>
+                        <input type="number" step="0.1" max="1" min="0" id="flood_severity" value="0.8" required>
+
+                        <label>Earthquake Risk (E)</label>
+                        <input type="number" step="0.1" max="1" min="0" id="earthquake_risk" value="0.2" required>
+
+                        <label>Political Instability (P)</label>
+                        <input type="number" step="0.1" max="1" min="0" id="political_instability" value="0.5" required>
+
+                        <label>Transportation Disruption (T)</label>
+                        <input type="number" step="0.1" max="1" min="0" id="transportation_disruption" value="0.8"
+                            required>
+
+                        <label>Infrastructure Risk (R)</label>
+                        <input type="number" step="0.1" max="1" min="0" id="regional_infrastructure_risk" value="0.4"
+                            required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" id="analyze-btn">
+                    <i class="fa-solid fa-microchip"></i> Run VAJRA Analysis
+                </button>
+            </form>
+        </section>
+
+        <!-- Results Section (Hidden until submitted) -->
+        <section id="results-section" class="results-section hidden">
+            <!-- Alert Banner -->
+            <div id="alert-banner" class="alert-banner default-alert">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div>
+                    <h2 id="alert-title">Analysis Complete</h2>
+                    <p id="alert-desc">Review the operational exposure and prescriptive actions below.</p>
+                </div>
+            </div>
+
+            <div class="results-grid">
+                <!-- Predictive Risk -->
+                <div class="result-card glass-panel predictive">
+                    <h3>Predictive Supplier Risk</h3>
+                    <div class="stat-value" id="srp-val">0.00</div>
+                    <div class="stat-label">Supplier Risk Probability (SRP)</div>
+                    <div class="badge" id="risk-badge">Classification</div>
+                </div>
+
+                <!-- Environmental Exposure -->
+                <div class="result-card glass-panel exposure">
+                    <h3>Operational Exposure</h3>
+                    <div class="stat-group">
+                        <div>
+                            <span class="small-label">Inventory Cover (IC)</span>
+                            <span class="small-val" id="ic-val">0 days</span>
+                        </div>
+                        <div>
+                            <span class="small-label">Exposure Gap (EG)</span>
+                            <span class="small-val" id="eg-val">0 days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integration -->
+                <div class="result-card glass-panel integration">
+                    <h3>Composite Vulnerability</h3>
+                    <div class="stat-value" id="cvi-val">0.000</div>
+                    <div class="stat-label">CVI Score</div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <div class="chart-container glass-panel">
+                    <h3>Risk Factor Analysis</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="riskRadarChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container glass-panel">
+                    <h3>Operational Exposure Comparison</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="exposureBarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="recommendations-panel glass-panel">
+                <h2><i class="fa-solid fa-list-check"></i> Prescriptive Actions</h2>
+                <div class="req-inventory">
+                    Target Required Inventory: <strong id="req-inv-val">0</strong> units
+                    <span class="additional-needed">(Need: <strong id="add-inv-val">0</strong>)</span>
+                </div>
+                <ul id="recommendations-list" class="recs-list">
+                    <!-- Added via JS -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- JS -->
+    <script src="app.js"></script>
+</body>
+
+</html>

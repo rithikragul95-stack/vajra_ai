@@ -1,0 +1,30 @@
+supplier_id,location,daily_demand,current_inventory,safety_stock,supplier_lead_time,days_of_delay,flood_severity,earthquake_risk,political_instability,transportation_disruption,regional_infrastructure_risk
+Exotic Liquids,"London, UK",176,3081,183,11,5,0.46,0.02,0.52,0.03,0.14
+New Orleans Cajun Delights,"New Orleans, USA",264,1610,461,32,6,0.36,0.35,0.05,0.27,0.25
+Grandma Kelly's Homestead,"Ann Arbor, USA",54,4952,276,23,6,0.47,0.2,0.48,0.02,0.17
+Tokyo Traders,"Tokyo, Japan",487,3906,136,22,9,0.43,0.11,0.03,0.3,0.29
+Cooperativa de Quesos 'Las Cabras',"Oviedo, Spain",347,1342,462,5,8,0.17,0.1,0.0,0.05,0.12
+Mayumi's,"Osaka, Japan",165,791,209,41,2,0.07,0.01,0.38,0.09,0.17
+Pavlova Ltd.,"Melbourne, Australia",99,4970,270,36,4,0.32,0.45,0.16,0.35,0.18
+Specialty Biscuits Ltd.,"Manchester, UK",356,3624,225,42,8,0.29,0.16,0.33,0.09,0.07
+PB Knäckebröd AB,"Göteborg, Sweden",192,4962,489,20,2,0.22,0.42,0.71,0.05,0.13
+Refrescos Americanas LTDA,"Sao Paulo, Brazil",207,988,197,39,6,0.27,0.14,0.61,0.24,0.02
+Heli Süßwaren GmbH & Co. KG,"Berlin, Germany",373,2635,141,40,5,0.4,0.2,0.17,0.09,0.22
+Plutzer Lebensmittelgroßmärkte AG,"Frankfurt, Germany",325,4856,279,29,2,0.26,0.27,0.07,0.02,0.14
+Nord-Ost-Fisch Handelsgesellschaft mbH,"Cuxhaven, Germany",220,3795,141,22,2,0.37,0.14,0.71,0.0,0.21
+Formaggi Fortini s.r.l.,"Ravenna, Italy",473,2890,233,35,9,0.33,0.21,0.61,0.36,0.11
+Norske Meierier,"Sandvika, Norway",309,4509,446,38,1,0.12,0.48,0.41,0.17,0.03
+Bigfoot Breweries,"Bend, USA",192,2501,409,15,9,0.34,0.13,0.67,0.11,0.07
+Svensk Sjöföda AB,"Stockholm, Sweden",405,1278,420,14,2,0.14,0.43,0.3,0.34,0.27
+Aux joyeux ecclésiastiques,"Paris, France",480,3762,99,34,9,0.09,0.28,0.27,0.24,0.27
+New England Seafood Cannery,"Boston, USA",469,4919,217,6,0,0.2,0.27,0.15,0.38,0.02
+Leka Trading,"Singapore, Singapore",119,390,415,33,2,0.35,0.28,0.74,0.32,0.22
+Lyngbysild,"Lyngby, Denmark",360,3795,169,43,8,0.12,0.38,0.39,0.02,0.17
+Zaanse Snoepfabriek,"Zaandam, Netherlands",214,645,151,24,1,0.06,0.16,0.61,0.15,0.12
+Karkki Oy,"Lappeenranta, Finland",282,2460,269,32,4,0.4,0.12,0.57,0.01,0.13
+G'day Mate,"Sydney, Australia",260,4072,72,9,4,0.11,0.18,0.09,0.32,0.16
+Ma Maison,"Montréal, Canada",76,1515,298,25,1,0.47,0.04,0.35,0.2,0.07
+Pasta Buttini s.r.l.,"Salerno, Italy",272,1595,427,23,4,0.12,0.11,0.06,0.35,0.24
+Escargots Nouveaux,"Montceau, France",239,3020,67,21,1,0.32,0.1,0.5,0.4,0.16
+Gai pâturage,"Annecy, France",383,4496,495,22,10,0.17,0.12,0.48,0.09,0.07
+Forêts d'érables,"Ste-Hyacinthe, Canada",128,4295,297,20,6,0.43,0.32,0.61,0.02,0.04

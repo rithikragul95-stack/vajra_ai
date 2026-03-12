@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAJRA AI | Supplier Directory</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .table-container {
+            margin-top: 2rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8fafc;
+            padding: 1.2rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--glass-border);
+        }
+
+        td {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            font-size: 1rem;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+        }
+
+        .alert-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .alert-critical {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--status-critical);
+            border: 1px solid var(--status-critical);
+        }
+
+        .alert-moderate {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--status-moderate);
+            border: 1px solid var(--status-moderate);
+        }
+
+        .alert-preventive {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--status-preventive);
+            border: 1px solid var(--status-preventive);
+        }
+
+        .alert-normal {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--status-normal);
+            border: 1px solid var(--status-normal);
+        }
+
+        .time-col {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .supplier-id {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: var(--accent-color);
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .supplier-id:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Modal styling for charts */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--bg-color-secondary);
+            margin: 5% auto;
+            padding: 2rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            width: 80%;
+            max-width: 900px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .close-btn {
+            color: var(--text-secondary);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: white;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+    <nav class="navbar">
+        <div class="logo" style="gap: 1rem;">
+            <img src="logo.png" alt="VAJRA AI Logo" style="height: 46px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(14, 165, 233, 0.3));">
+            <span style="font-size: 1.8rem; letter-spacing: -0.5px; font-weight: 400;">VAJRA <strong style="color: var(--accent-color); font-weight: 700;">AI</strong></span>
+        </div>
+        <div class="nav-links">
+            <a href="simulator.html">Simulator</a>
+            <a href="suppliers.html" class="active">Suppliers</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="index.html" style="color: var(--status-critical); margin-left: 1rem;" title="Logout"><i class="fa-solid fa-power-off"></i></a>
+        </div>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin">
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+                <h1>Supplier <span>Registry</span></h1>
+                <p>Global view of all monitored suppliers and their latest risk exposure profiles.</p>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <input type="file" id="csvFileInput" style="display: none;" accept=".csv">
+                <button onclick="document.getElementById('csvFileInput').click()" class="btn-primary"
+                    style="margin-top: 0; background-color: var(--accent-color);">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Upload CSV
+                </button>
+                <button onclick="window.location.href='simulator.html'" class="btn-primary"
+                    style="margin-top: 0; background-color: var(--status-moderate);">
+                    <i class="fa-solid fa-plus"></i> Add Supplier
+                </button>
+                <button onclick="window.location.href='/api/export'" class="btn-primary"
+                    style="margin-top: 0; background-color: var(--status-preventive);">
+                    <i class="fa-solid fa-download"></i> Export Report
+                </button>
+            </div>
+        </header>
+
+        <section class="glass-panel">
+            <h2><i class="fa-solid fa-users-viewfinder"></i> Latest Threat Assessments</h2>
+            <div class="table-container">
+                <table id="suppliers-table">
+                    <thead>
+                        <tr>
+                            <th>Supplier ID</th>
+                            <th>Location</th>
+                            <th>Delay</th>
+                            <th>Last Analyzed</th>
+                            <th>Inv. Cover</th>
+                            <th>SRP (Risk)</th>
+                            <th>CVI Score</th>
+                            <th>Status Matrix</th>
+                        </tr>
+                    </thead>
+                    <tbody id="suppliers-tbody">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 3rem;">
+                                <i class="fa-solid fa-circle-notch fa-spin"
+                                    style="font-size: 2rem; color: var(--accent-color);"></i>
+                                <p style="margin-top: 1rem; color: var(--text-secondary);">Loading supplier database...
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Chart Modal -->
+        <div id="chartModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="closeModal">&times;</span>
+                <h2 style="font-family: 'Outfit', sans-serif; color: var(--accent-color);" id="modalTitle">Supplier
+                    History</h2>
+                <div class="chart-container">
+                    <canvas id="historyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="suppliers.js"></script>
+</body>
+
+</html>

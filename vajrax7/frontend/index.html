@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAJRA AI | Corporate Secure Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="index.css">
+
+    <style>
+        body.login-body {
+            background-color: var(--bg-color-main);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(14, 165, 233, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(239, 68, 68, 0.1), transparent 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 480px;
+            padding: 2rem;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .login-card {
+            padding: 3.5rem;
+            text-align: center;
+        }
+
+        .login-card .logo {
+            justify-content: center;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .login-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-primary);
+        }
+
+        .login-card p {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        .login-form {
+            text-align: left;
+        }
+
+        .login-form label {
+            margin-top: 1.2rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .login-form input {
+            width: 100%;
+            margin-top: 0.5rem;
+            padding: 1rem 1.2rem;
+            background: #f8fafc;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .login-form input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+            background: #ffffff;
+        }
+
+        .login-btn {
+            width: 100%;
+            margin-top: 2.5rem;
+            justify-content: center;
+            font-size: 1.1rem;
+            padding: 1rem;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .forgot-password:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .security-badge {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .security-badge i {
+            color: var(--status-preventive);
+        }
+    </style>
+</head>
+
+<body class="dark-theme login-body">
+
+    <div class="login-wrapper">
+        <div class="glass-panel login-card">
+            <div class="logo" style="display: flex; align-items: center; justify-content: center; margin-bottom: 2.5rem; gap: 0.8rem;">
+                <img src="logo.png" alt="VAJRA AI Logo" style="height: 72px; width: auto; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(14, 165, 233, 0.4));">
+                <span style="font-size: 3.2rem; font-weight: 300; letter-spacing: -1px; color: var(--text-primary);">VAJRA <strong style="color: var(--accent-color); font-weight: 700;">AI</strong></span>
+            </div>
+            
+            <h2>Secure Enterprise Portal</h2>
+            <p>Access your global supply chain intelligence.</p>
+
+            <form class="login-form" onsubmit="event.preventDefault(); window.location.href='suppliers.html';">
+                <label>Corporate ID / Email</label>
+                <input type="email" placeholder="admin@company.com" required>
+
+                <label>Password</label>
+                <input type="password" placeholder="••••••••" required>
+
+                <button type="submit" class="btn-primary login-btn">
+                    Authenticate <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                </button>
+            </form>
+
+            <a href="#" class="forgot-password">Forgot Credentials?</a>
+            
+            <div class="security-badge">
+                <i class="fa-solid fa-lock"></i> AES-256 Encrypted Connection
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
